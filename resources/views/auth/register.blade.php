@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -61,6 +63,19 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Captcha</label>
+                            <div class="col-md-6 pull-center">
+                                {!! app('captcha')->display() !!}
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                    <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+ 
+                        
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
